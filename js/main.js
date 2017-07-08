@@ -28,9 +28,31 @@ function saveBookmark(e) {
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
 
+    //Re-fetch
+    fetchBookmarks();
     // Prevent form from submitting
     e.preventDEfault();
 }
+
+
+//Delete bookmarks
+function deleteBookmark(url) {
+    // Get bookmarks from LocalStorage
+    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+    // Loop throught bookmarks
+    for (var i = 0; i < bookmarks.length; i++) {
+        if (bookmarks[i].url == url) {
+            // Remove from array
+            bookmarks.splice(i, 1);
+        }
+
+    }
+    // Re-set back to LocalStorageliste
+    localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
+
+
+}
+
 
 // Fetch bookmarks
 function fetchBookmarks() {
