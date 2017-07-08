@@ -24,10 +24,35 @@ function saveBookmark(e) {
         var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
         // Add bookmark to array
         bookmarks.push(bookmark);
-        // Re-set back to LocalStorage
+        // Re-set back to LocalStorageliste
         localStorage.setItem('bookmarks', JSON.stringify(bookmarks));
     }
 
     // Prevent form from submitting
     e.preventDEfault();
+}
+
+// Fetch bookmarks
+function fetchBookmarks() {
+    // Get bookmarks from LocalStorage
+    var bookmarks = JSON.parse(localStorage.getItem('bookmarks'));
+
+    // Get output id
+    var bookmarksResults = document.getElementById('bookmarksResults');
+
+    //Build output
+    bookmarksResults.innerHTML = '';
+    for (var i = 0; i < bookmarks.length; i++) {
+        var name = bookmarks[i].name;
+        var url = bookmarks[i].url;
+        bookmarksResults.innerHTML += '<div class="well">' +
+            '<h3>' + name +
+            ' <a class="btn btn-default" target="_blank" href="' + url + '">Visit</a>' +
+            ' <a class="btn btn-danger" onclick="deleteBookmark(\'' + url + '\')" target="_blank" href="#">Delete</a>' +
+            '</h3>' +
+            '</div>';
+
+
+    }
+
 }
